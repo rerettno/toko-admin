@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buat Pembelian</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .wrap { background: white; padding: 20px; border-radius: 8px; width: 60%; margin: auto; }
+        select, input { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #ccc; border-radius: 5px; }
+        .btn { padding: 10px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <h2>Buat Pembelian</h2>
+
+    <form action="/pembelian/tambah" method="POST">
+        <label>Pilih Produk</label>
+        <select name="produk_id" required>
+            <% produk.forEach(p => { %>
+                <option value="<%= p.id %>">
+                    <%= p.nama %> — stok <%= p.stok %> — Rp <%= p.harga.toLocaleString() %>
+                </option>
+            <% }) %>
+        </select>
+
+        <label>Qty</label>
+        <input type="number" name="qty" required min="1">
+
+        <br><br>
+        <button class="btn">Simpan</button>
+        <a class="btn" style="background:#7f8c8d" href="/pembelian">Kembali</a>
+    </form>
+</div>
+
+</body>
+</html>

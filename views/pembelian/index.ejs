@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daftar Pembelian</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f5f5f5; }
+        .wrap { background: white; padding: 20px; border-radius: 8px; width: 90%; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        table th, table td { padding: 10px; border: 1px solid #ccc; }
+        table th { background: #eee; }
+        .btn { padding: 8px 13px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; }
+        .btn-danger { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <h2>Daftar Pembelian</h2>
+
+    <a class="btn" href="/pembelian/tambah">+ Buat Pembelian</a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Produk</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Aksi</th>
+        </tr>
+
+        <% pembelian.forEach(p => { %>
+            <tr>
+                <td><%= p.id %></td>
+                <td><%= p.nama_produk %></td>
+                <td><%= p.qty %></td>
+                <td>Rp <%= p.total.toLocaleString() %></td>
+                <td><%= p.status %></td>
+                <td>
+                    <% if (p.status === "success") { %>
+                        <a class="btn-danger btn" href="/pembelian/cancel/<%= p.id %>">Cancel</a>
+                    <% } else { %>
+                        <span style="color:gray;">Cancelled</span>
+                    <% } %>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</div>
+
+</body>
+</html>
